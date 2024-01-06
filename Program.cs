@@ -1,44 +1,38 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 
 class Program
 {
     static void Main()
     {
-        string inputString = "20230911 asd2324234jghjsd hjsdg sdhk 01072024 idf32432 32423 d34234jh dfh";
-        
-        // Define the regular expression pattern for MMDDYYYY format
-        string pattern = @"\b(\d{2})(\d{2})(\d{4})\b";
-        
-        // Use Regex to find matches in the input string
-        MatchCollection matches = Regex.Matches(inputString, pattern);
-
-        // Iterate through matches and print valid dates
-        foreach (Match match in matches)
+        Console.WriteLine("Enter the height of the triangle:");
+    
+        if (int.TryParse(Console.ReadLine(), out int height))
         {
-            int month = int.Parse(match.Groups[1].Value);
-            int day = int.Parse(match.Groups[2].Value);
-            int year = int.Parse(match.Groups[3].Value);
-
-            if (IsValidDate(month, day, year))
-            {
-                string formattedDate = $"{month:D2}{day:D2}{year:D4}";
-                Console.WriteLine("Valid Date Found: " + formattedDate);
-            }
+            PrintTriangle(height);
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please enter a valid integer.");
         }
     }
 
-    // Function to check if the date is valid
-    static bool IsValidDate(int month, int day, int year)
+    static void PrintTriangle(int height)
     {
-        try
+        for (int i = 1; i <= height; i++)
         {
-            DateTime date = new DateTime(year, month, day);
-            return true;
-        }
-        catch (ArgumentOutOfRangeException)
-        {
-            return false;
+            // Print spaces before the stars
+            for (int j = 1; j <= height - i; j++)
+            {
+                Console.Write(" ");
+            }
+
+            // Print stars
+            for (int k = 1; k <= 2 * i - 1; k++)
+            {
+                Console.Write("*");
+            }
+
+            Console.WriteLine(); // Move to the next line
         }
     }
 }
